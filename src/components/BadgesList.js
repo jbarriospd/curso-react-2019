@@ -1,9 +1,11 @@
 import React from "react";
-
+// import {Link} from 'react-router-dom'
 import "./styles/BadgesList.css";
 
 class BadgesListItem extends React.Component {
-  render() {
+
+  render() {     
+    
     return (
       <div className="BadgesListItem">
         <img
@@ -16,7 +18,7 @@ class BadgesListItem extends React.Component {
           <strong>
             {this.props.badge.firstName} {this.props.badge.lastName}
           </strong>
-          <br />@{this.props.badge.twitter}
+          <br />@{this.props.badge.socialMedia}
           <br />
           {this.props.badge.jobTitle}
         </div>
@@ -27,6 +29,18 @@ class BadgesListItem extends React.Component {
 
 class BadgesList extends React.Component {
   render() {
+   
+    // if(this.props.badges.length === 0) {
+
+    //   return(
+
+    //     <div>
+    //       <h3>No encontramos ningun badges </h3>
+    //       <Link className="btn btn-primary" to="badges/new">Crealos</Link>
+    //     </div>
+    //   )      
+    // }
+
     return (
       <div className="BadgesList">
         <ul className="list-unstyled">
