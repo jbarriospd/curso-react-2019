@@ -149,7 +149,7 @@ class Badges extends React.Component {
             lastName: 'Grady',
             email: 'Leann_Berge@gmail.com',
             jobTitle: 'Legacy Brand Director',
-            twitter: 'FredaGrady22221-7573',
+            socialMedia: 'FredaGrady22221-7573',
             avatarUrl:
               'https://www.gravatar.com/avatar/f63a9c45aca0e7e7de0782a6b1dff40b?d=identicon',
           },
@@ -159,7 +159,7 @@ class Badges extends React.Component {
             lastName: 'Rodriguez',
             email: 'Ilene66@hotmail.com',
             jobTitle: 'Human Research Architect',
-            twitter: 'MajorRodriguez61545',
+            socialMedia: 'MajorRodriguez61545',
             avatarUrl:
               'https://www.gravatar.com/avatar/d57a8be8cb9219609905da25d5f3e50a?d=identicon',
           },
@@ -169,7 +169,7 @@ class Badges extends React.Component {
             lastName: 'Torphy',
             email: 'Ron61@hotmail.com',
             jobTitle: 'National Markets Officer',
-            twitter: 'DaphneyTorphy96105',
+            socialMedia: 'DaphneyTorphy96105',
             avatarUrl:
               'https://www.gravatar.com/avatar/e74e87d40e55b9ff9791c78892e55cb7?d=identicon',
           },
@@ -230,6 +230,181 @@ export default Badges;
 
 ```
 
-
+Hacer una propia API : express.js 
 Como poner una apikey de forma privada: https://platzi.com/comentario/759989/
 
+loader : https://loading.io/css/
+
+
+Voltear el elementos a los mas recientes: https://platzi.com/comentario/645687/
+
+}
+configuracion de oh-myzsh: https://evdokimovm.github.io/windows/zsh/shell/syntax/highlighting/ohmyzsh/hyper/terminal/2017/02/24/how-to-install-zsh-and-oh-my-zsh-on-windows-10.html
+
+```
+this.props.match.params
+
+```
+
+Cada una de esas variables que insertamos en el path y que declaramos en las rutas los podemos acceder con el objeto params . . .
+
+topic: https://platzi.com/comentario/682832/
+
+
+Uso de actualizaciones automaticas utilizando polling en clase 30
+
+El polling es un anti patrón a la hora de desarrollar, enseñarlo para fines prácticos no está mal, se ahorra explicar el cómo montar un socket, aunque podría haber usado la capa gratuita de firebase y hubiera sido mucho mejor, le hubiera tomado el mismo tiempo que le tomó parchear todas las cosas que produce el polling.
+El problema que veo principalmente es que no explica claramente las consecuencias y afecta bastante el aprendizaje de los que recíen empiezan al mostrar el polling como una “solución viable para sistemas simples”. Aunque por otra parte, si hubiera polling en platzi al menos no se romperían los cursos cuando te meten en medio un video de youtube
+
+
+Los componentes presentacionales casi nunca tienen estados y se hacen en base a funciones, importan los estilos y contienen las clases
+
+Los componentes inteligentes contienen el estado y los metodos que dan logica a la App y lo transfieren a otros componentes a través de Props
+
+
+{props.childresn}: nos va servir para especificar esta te
+Composotion Raact?: utilizar componentes genericos para crear uno especifico
+
+
+Los contenedores tiene el manejo del estado 
+
+Cerrar el modal con un loading:
+
+````
+handleClickYes = async () => {
+    this.setState({ loading: true, error: null });
+    try {
+      const badgeid = this.props.match.params.badgeId;
+      await api.badges.remove(badgeid);
+      this.setState({ loading: false });
+      this.props.history.push("/badges");
+    } catch (error) {
+      this.setState({ loading: false, error });
+    }
+  };```
+
+```
+
+## Hooks
+
+Las funciones no tienen un estado propio que manejar como ciclos de vida a los que deben suscribirse, mientras tanto las clases sí cuentan con ello.
+
+React tiene un feature llamado Hooks que permite que las funciones también tengan features que solamente tienen las clases.
+
+Hooks: Permiten a los componentes funcionales tener características que solo las clases tienen:
+
+useState: Para manejo de estado.
+useEffect: Para suscribir el componente a su ciclo de vida.
+useReducer: Ejecutar un efecto basado en una acción.
+Custom Hooks: Usamos los hooks fundamentales para crear nuevos hooks custom. Estos hooks irán en su propia función y su nombre comenzará con la palabra use. Otra de sus características es que no pueden ser ejecutados condicionalmente (if).
+
+useState regresa un arreglo de dos argumentos.
+
+
+
+**LOS HOOKS SOLO FUNCIONAN DENTRO DE COMPONENTES FUNCIONALES**
+Mirad el siguiente video si quereis hacerlo en un sitio donde tengais una clase
+
+
+Realmente es un mal concepto, hooks trae props al igual que los class component.
+Lo que hace a los hooks mejores es que pueden ser usados en funcional components y staless functional components cosa que antes no se podía. con su sintaxis de useState y useEffect puede traer estados y ciclo de vida respectivamente en componentes que no son class component, caso que no sucedía con la versión anterior.
+Ahora si me habras del envío de props innecesarios, ese ya es otro tema y se llama React Context. Te sugiero investifar un poco más acerca de ellos.
+Imaginemos que tenemos 10 componentes y cada uno esta dentro del otro, entonces necesitarias llevar cada uno de los props por cada componente para llegar al componente más profundo. (son props innecesarios para componentes que no necesitan y se pasan por que estan en el camino), pero con context tu mismo indicas cuales componentes van a heredar dichos props. Términos que definen un context son dos: Provider y Consumer
+
+
+Por aqui les dejo un custom hook para que puedan manejar el state y onChange en los inputs!
+
+import { useState } from 'react';
+
+const useInput = defaultValues => {
+  const [values, setValues] = useState(defaultValues);
+
+  const onChangeHandler = e => {
+    const { name, value } = e.target;
+    setValues({ ...values, [name]: value });
+  };
+
+  return { values, onChangeHandler };
+};
+
+export default useInput;
+
+/// use case
+
+/* eslint-disable jsx-a11y/label-has-for */
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React from 'react';
+
+import useInput from '../../hooks/useInput';
+import Input from '../Input/Input';
+import './BadgeForm.css';
+
+const BadgeForm = () => {
+  const { values, onChangeHandler } = useInput({
+    name: '',
+    lastName: '',
+    email: '',
+    jobTitle: '',
+    twitter: '',
+  });
+
+  return (
+    <divclassName="Badge__form">
+      <h3className="Badge__form-title">New attendant</h3>
+      <formclassName="Badge__form-container"onSubmit={onSubmitHandler}>
+        <divclassName="Badge__container-group">
+          <label>First Name</label>
+          <Input
+            type="text"
+            name="name"
+            value={values.name}
+            change={onChangeHandler}
+          />
+        </div>
+        <divclassName="Badge__container-group">
+          <label>Last Name</label>
+          <Input
+            type="text"
+            name="lastName"
+            value={values.lastName}
+            change={onChangeHandler}
+          />
+        </div>
+        <divclassName="Badge__container-group">
+          <label>Email</label>
+          <Input
+            type="email"
+            name="email"
+            value={values.email}
+            change={onChangeHandler}
+          />
+        </div>
+        <divclassName="Badge__container-group">
+          <label>Email</label>
+          <Input
+            type="text"
+            name="jobTitle"
+            value={values.jobTitle}
+            change={onChangeHandler}
+          />
+        </div>
+        <divclassName="Badge__container-group">
+          <label>Twitter</label>
+          <Input
+            type="text"
+            name="twitter"
+            value={values.twitter}
+            change={onChangeHandler}
+          />
+        </div>
+        <buttontype="submit">Register</button>
+      </form>
+    </div>
+  );
+};
+
+export default BadgeForm;
+
+
+Analisis de sentimientos
+Cloud Natural Language ML API
